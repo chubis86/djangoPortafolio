@@ -15,12 +15,19 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from portfolio import views
+#Vamos a importar las urls de blog. Se agrega el include en línea 17. 
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    # me está generando error path('blog/', include('blog.urls'))
 ]
 
 if(settings.DEBUG):
-    from django.conf.urls.static import static
+    #from django.conf.urls.static import static
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
